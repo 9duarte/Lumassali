@@ -2,7 +2,7 @@
     require_once dirname(__DIR__) . '/vendor/autoload.php';
 
     $serverEnvDirectory = '/home/xpt123';
-    $serverEnvFilename = 'config.env';
+    $serverEnvFilename = 'lumassali.env';
     if (is_file($serverEnvDirectory . DIRECTORY_SEPARATOR . $serverEnvFilename)) {
         $dotenv = Dotenv\Dotenv::createImmutable($serverEnvDirectory, $serverEnvFilename);
     } else {
