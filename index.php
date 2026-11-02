@@ -230,7 +230,16 @@
                     grid.replaceChildren();
                 
                     if (!d.ok || d.departures.length === 0) {
-                        grid.append(el('p', null, d.ok ? 'Sem passagens previstas nas próximas horas' : 'Informação indisponível de momento'));
+                        if (d.ok) {
+                            const vazio = el('div', 'ac-empty');
+                            const icon = el('div', 'ac-empty-icon');
+                            icon.innerHTML = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="12" width="44" height="36" rx="6"></rect><path d="M10 36h44M18 48v5M46 48v5M16 21h14v10H16zM34 21h14v10H34z"></path><circle cx="20" cy="42" r="3"></circle><circle cx="44" cy="42" r="3"></circle></svg>';
+                            vazio.append(icon);
+                            vazio.append(el('div', 'ac-empty-text', 'Não há autocarros previstos nas próximas horas'));
+                            grid.append(vazio);
+                        } else {
+                            grid.append(el('p', null, 'Informação indisponível de momento'));
+                        }
                         return;
                     }
                 
