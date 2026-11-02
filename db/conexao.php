@@ -1,16 +1,17 @@
 <?php
     require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-    $envDirectory = dirname(__DIR__, 2);
-    $envFilename = 'lumassali.env';
-
-    if (!is_file($envDirectory . DIRECTORY_SEPARATOR . $envFilename)) {
-        $envDirectory = dirname(__DIR__);
-        $envFilename = '.env';
+    $serverEnvDirectory = '/home/xpt123';
+    $serverEnvFilename = 'config.env';
+    if (is_file($serverEnvDirectory . DIRECTORY_SEPARATOR . $serverEnvFilename)) {
+        $dotenv = Dotenv\Dotenv::createImmutable($serverEnvDirectory, $serverEnvFilename);
+    } else {
+        $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__), '.env');
     }
 
-    $dotenv = Dotenv\Dotenv::createImmutable($envDirectory, $envFilename);
-    $dotenv->load();
+    if (!isset($_ENV['DATABASE_HOST'])) {
+        $dotenv->load();
+    }
     $dotenv->required([
         'DATABASE_HOST',
         'DATABASE_USER',
