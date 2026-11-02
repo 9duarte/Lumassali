@@ -77,8 +77,9 @@ html, body { margin: 0; padding: 0; }
 /* Faz a página ocupar sempre pelo menos a altura do ecrã, e o wrapper
     do balcão crescer para preencher o espaço que sobra por baixo da
     tabela de preços de cima. */
-body { display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; }
-#balcao-wrapper { flex: 1; display: flex; flex-direction: column; }
+html, body { height: 100%; overflow: hidden; }
+body { display: flex; flex-direction: column; min-height: 0; box-sizing: border-box; }
+#balcao-wrapper { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 
 #balcao-autocarros {
     background: #0d1220;
@@ -94,9 +95,8 @@ body { display: flex; flex-direction: column; min-height: 100vh; box-sizing: bor
     /* Empurra o painel para o fundo do espaço disponível no wrapper,
         em vez de ficar colado logo a seguir à tabela de preços. */
     margin-top: auto;
-    /* Tamanho fixo, para não encolher com menos autocarros (0 a 6).
-        Ajusta este número se não bater certo com o teu ecrã. */
-    min-height: 699px;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .ac-header { display: flex; align-items: center; gap: 1.2rem; padding-bottom: 1.2rem; }
@@ -114,7 +114,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; box-sizing: bor
 .ac-dia { color: #c3c9d6; margin-top: .3rem; }
 .ac-data { color: #8b93a7; font-size: .95rem; }
 
-.ac-lista { display: flex; flex-direction: column; gap: .7rem; flex: 1; justify-content: flex-start; }
+.ac-lista { display: flex; flex-direction: column; gap: .7rem; flex: 1; min-height: 0; overflow: hidden; justify-content: flex-start; }
 
 .ac-item {
     display: flex; align-items: center; gap: 1rem;
