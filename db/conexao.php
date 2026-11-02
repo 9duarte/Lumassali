@@ -1,10 +1,19 @@
 <?php
-    // Change this to your connection info.
-    $DATABASE_HOST = '4x1.pt';
-    $DATABASE_USER = 'xpt123_lumassali';
-    $DATABASE_PASS = 'Lumassali2025';
-    $DATABASE_NAME = 'xpt123_lumassali';
-    // Try and connect using the info above.
+    require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+    $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+    $dotenv->required([
+        'DATABASE_HOST',
+        'DATABASE_USER',
+        'DATABASE_PASS',
+        'DATABASE_NAME',
+    ])->notEmpty();
+
+    $DATABASE_HOST = $_ENV['DATABASE_HOST'];
+    $DATABASE_USER = $_ENV['DATABASE_USER'];
+    $DATABASE_PASS = $_ENV['DATABASE_PASS'];
+    $DATABASE_NAME = $_ENV['DATABASE_NAME'];
+
     $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
     $con->set_charset("utf8");
     // if ( mysqli_connect_errno() ) {
