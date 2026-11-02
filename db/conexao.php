@@ -1,7 +1,15 @@
 <?php
     require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-    $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+    $envDirectory = dirname(__DIR__, 2);
+    $envFilename = 'lumassali.env';
+
+    if (!is_file($envDirectory . DIRECTORY_SEPARATOR . $envFilename)) {
+        $envDirectory = dirname(__DIR__);
+        $envFilename = '.env';
+    }
+
+    $dotenv = Dotenv\Dotenv::createImmutable($envDirectory, $envFilename);
     $dotenv->load();
     $dotenv->required([
         'DATABASE_HOST',
